@@ -1,7 +1,7 @@
 package com.woter.fact.bus.annotation;
 
 import com.woter.fact.bus.adpter.EventAdapter;
-import com.woter.fact.bus.facede.EventBusFacade;
+import com.woter.fact.bus.facede.EventBusManager;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +11,12 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 
 /**
+ * 实现自动注册及注销EventAdapter
  * @author woter
  * @date 2017-6-29 上午11:24:00
  * @version
  */
-@Configuration
+//@Configuration
 public class EventBusConfiguration implements InitializingBean, DisposableBean {
 
     @Autowired
@@ -29,7 +30,7 @@ public class EventBusConfiguration implements InitializingBean, DisposableBean {
         beans = applicationContext.getBeansOfType(EventAdapter.class);
         if (beans != null) {
             for (EventAdapter eventAbstract : beans.values()) {
-                EventBusFacade.register(eventAbstract);
+                EventBusManager.register(eventAbstract);
             }
         }
     }
@@ -38,7 +39,7 @@ public class EventBusConfiguration implements InitializingBean, DisposableBean {
     public void destroy() throws Exception {
         if (beans != null) {
             for (EventAdapter eventAbstract : beans.values()) {
-                EventBusFacade.unregister(eventAbstract);
+                EventBusManager.unregister(eventAbstract);
             }
         }
     }
