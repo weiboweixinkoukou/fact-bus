@@ -1,3 +1,4 @@
+/*
 package com.woter.fact.bus.test;
 
 import org.springframework.beans.BeansException;
@@ -21,3 +22,4 @@ public class MyPostProcessor implements BeanPostProcessor {
         return bean;
     }
 }
+*/

@@ -16,7 +16,7 @@ import java.util.Map;
  * @date 2017-6-29 上午11:24:00
  * @version
  */
-//@Configuration
+@Configuration
 public class EventBusConfiguration implements InitializingBean, DisposableBean {
 
     @Autowired

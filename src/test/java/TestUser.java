@@ -1,3 +1,4 @@
+/*
 import com.woter.fact.bus.test.MainConfig;
 import com.woter.fact.bus.test.User;
 import org.junit.Test;
@@ -21,3 +22,4 @@ public class TestUser {
     }
 
 }
+*/
