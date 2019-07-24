@@ -43,10 +43,10 @@ public class TrcEventHandler extends EventAdapter<TrcBaseEvent> {
             不同的组再定义一个失败重试事件 handler里对这一组进行顺序重试
             */
 
-            //TODO 如果不是更新
+            //TODO 这里接受的是除了更新操作的所有失败重试的任务
             log.error("失败原因:{}", message);
             System.out.println("失败重试，需要将重试次数加1");
-            //TODO 如果是更新 需要向表里添加此次更新失败的记录
+
 
         } else {
             log.error("失败原因:{}", message);
