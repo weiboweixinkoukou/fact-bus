@@ -23,7 +23,7 @@ public class TrcUpdateFailRetryHandler extends EventAdapter<TrcUpdateFailRetryEv
     @Override
     protected void exceptionProcess(TrcUpdateFailRetryEvent trcUpdateFailRetryEvent, String message) {
         //出现异常 如果算更新失败次数的话 得单独拉一张表 针对哪个单号 对象 更新操作 创建更新时间   【顺序执行时哪一个失败请求重试出现异常的id】 返回异常信息 重试次数
-        //TODO 表中不存在这个数据 新增(首次新增为1) 存在更新重试次数 最新的失败返回信息 最新的顺序执行失败表的id
+        //TODO 表中不存在这个数据 新增(首次新增为1，因为是失败重试引起的) 存在更新重试次数 最新的失败返回信息 最新的顺序执行失败表的id
 
     }
 
@@ -33,7 +33,7 @@ public class TrcUpdateFailRetryHandler extends EventAdapter<TrcUpdateFailRetryEv
         //针对一批的更新失败进行重试
         List<CallKingDeeRequest> callKingDeeRequests = trcUpdateFailRetryEvent.getCallKingDeeRequests();
         callKingDeeRequests.forEach(i->{
-           //必须同步重试 得按照顺序一个一个来 每一个抓异常
+           //必须同步重试 得按照时间顺序一个一个来 每一个抓异常
             try {
                 //调用金蝶接口
             }catch (Exception e){
