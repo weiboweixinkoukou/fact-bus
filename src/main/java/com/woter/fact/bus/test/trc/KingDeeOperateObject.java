@@ -1,17 +1,18 @@
-package com.woter.fact.bus.test;
+package com.woter.fact.bus.test.trc;
 
-public enum OperateType {
-    SAVE("保存",0),
-    UPDATE("更新",1)
+public enum KingDeeOperateObject {
+
+    ITEM(1,"商品"),
+    WAREHOUSE(2,"仓库")
     ;
 
-    OperateType(String name, Integer code) {
+    KingDeeOperateObject( Integer code,String name) {
         this.name = name;
         this.code = code;
     }
 
-    private String name;
     private Integer code;
+    private String name;
 
     public String getName() {
         return name;

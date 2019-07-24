@@ -1,4 +1,4 @@
-package com.woter.fact.bus.test;
+package com.woter.fact.bus.test.event;
 
 import com.woter.fact.bus.event.BaseEvent;
 

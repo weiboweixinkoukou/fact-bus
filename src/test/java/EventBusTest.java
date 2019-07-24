@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -28,5 +29,13 @@ public class EventBusTest {
         asyncEventBus.post("这是消息");
         System.out.println("开始睡眠");
         TimeUnit.SECONDS.sleep(5L);
+    }
+
+    public static void main(String[] args) throws NoSuchMethodException {
+        Class<EventBusTest> eventBusTestClass = EventBusTest.class;
+        Method subscribe = eventBusTestClass.getMethod("subscribe", Object.class);
+        Class<?>[] parameterTypes = subscribe.getParameterTypes();
+        Class<?> parameterType = parameterTypes[0];
+        System.out.println(parameterType);
     }
 }

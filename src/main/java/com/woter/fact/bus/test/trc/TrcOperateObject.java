@@ -1,18 +1,17 @@
-package com.woter.fact.bus.test;
+package com.woter.fact.bus.test.trc;
 
-public enum OperateObject {
-
-    ITEM("商品",1),
-    WAREHOUSE("仓库",1)
+public enum TrcOperateObject {
+    ITEM(1,"商品"),
+    WAREHOUSE(2,"仓库")
     ;
 
-    OperateObject(String name, Integer code) {
+    TrcOperateObject( Integer code,String name) {
         this.name = name;
         this.code = code;
     }
 
-    private String name;
     private Integer code;
+    private String name;
 
     public String getName() {
         return name;

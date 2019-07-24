@@ -1,12 +1,13 @@
 package com.woter.fact.bus.facede;
 
 import com.google.common.eventbus.AsyncEventBus;
+import com.google.common.eventbus.EventBus;
 import com.woter.fact.bus.adpter.EventAdapter;
 import com.woter.fact.bus.event.BaseEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * EventBus处理类，主要用于注册或注销及发布相关事件
@@ -19,7 +20,8 @@ public class EventBusManager {
     private static final Logger logger = LoggerFactory.getLogger(EventBusManager.class);
 
 //    private final static EventBus eventBus = new EventBus();
-    private final static AsyncEventBus eventBus = new AsyncEventBus(Executors.newFixedThreadPool(3));
+    private static BlockingQueue<Runnable> workQueue = new LinkedBlockingDeque<>();
+    private final static AsyncEventBus eventBus = new AsyncEventBus(new ThreadPoolExecutor(5,20,30, TimeUnit.SECONDS,workQueue));
 
 
 
@@ -41,7 +43,7 @@ public class EventBusManager {
         if (event == null) {
             return;
         }
-        logger.info("eventBus异步注册事件");
+        logger.info("eventBus异步注册事件"+event.getClass());
         eventBus.post(event);
     }
 

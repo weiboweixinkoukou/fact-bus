@@ -1,16 +1,9 @@
 package com.woter.fact.bus.test.strategy;
 
-import com.woter.fact.bus.test.KingDeeBaseEvent;
+import com.woter.fact.bus.test.event.TrcBaseEvent;
 
 public interface CallKingDeeStrategy {
 
-    String doCallKingDee(KingDeeBaseEvent kingDeeBaseEvent);
-
-    /// <summary>
-    /// 是否可以解析
-    /// </summary>
-    boolean Analysisable();
-
-    //TODO 插入失败数据
+    void doCallKingDee(TrcBaseEvent trcBaseEvent);
 
 }

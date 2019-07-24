@@ -25,19 +25,17 @@ public abstract class EventAdapter<E extends BaseEvent> {
     public void onEvent(BaseEvent event) {
         if (ReflectionUtils.findMethod(this.getClass(), METHOD_NAME, event.getClass()) != null) {
             try {
-                if (!process((E) event)) {
-                    logger.warn("handle event {} fail", event.getClass());
-                }
+                process((E) event);
             } catch (Exception e) {
-                exceptionProcess((E) event);
+                exceptionProcess((E) event,e.getMessage());
                 //执行任务失败了 记录失败的对象,在库里或者在缓存中进行标识 这些失败的对象 需要跑定时任务进行重试
                 logger.error(String.format("handle event %s exception", event.getClass()), e);
             }
         }
     }
 
-    protected abstract void exceptionProcess(E event);
+    protected abstract void exceptionProcess(E event, String message);
 
-    public abstract boolean process(E e);
+    public abstract void process(E e);
 
 }
