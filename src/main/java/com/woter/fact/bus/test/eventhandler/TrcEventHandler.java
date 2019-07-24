@@ -41,6 +41,11 @@ public class TrcEventHandler extends EventAdapter<TrcBaseEvent> {
             是更新的在定时任务主线程一个个跑 那对于类型是更新的所有基础和单据只要有一个出错是不是定时任务里更新的全部gg
             或者更新的可以根据单号进行分组
             不同的组再定义一个失败重试事件 handler里对这一组进行顺序重试
+
+            定时任务可以根据这张更新表失败的状态的单号反查失败表失败的记录进行重试
+
+            寻找更新失败的记录进行重试的时候需要根据最后一条是不是失败的 如果是 需要重试 不是不需要重试
+
             */
 
             //TODO 这里接受的是除了更新操作的所有失败重试的任务
@@ -82,6 +87,15 @@ public class TrcEventHandler extends EventAdapter<TrcBaseEvent> {
 
                 context.AnalysisAction(trcBaseEvent);
         }*/
-        context.doCallBiz(trcBaseEvent);//自动实现解析，不用关心使用哪种策略
+        try {
+            context.doCallBiz(trcBaseEvent);//自动实现解析，不用关心使用哪种策略
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        if (trcBaseEvent.getIsRecordFail()) {
+            //TODO 如果是失败尝试的话 这一次没有失败 需要将失败事件置位成功
+
+        }
+
     }
 }
