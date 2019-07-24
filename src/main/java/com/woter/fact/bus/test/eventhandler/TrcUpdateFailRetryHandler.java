@@ -37,8 +37,10 @@ public class TrcUpdateFailRetryHandler extends EventAdapter<TrcUpdateFailRetryEv
             try {
                 //调用金蝶接口
             }catch (Exception e){
+                //此次出错的事件id
                 trcUpdateFailRetryEvent.setUpdateRetryFailId(i.getId());
-                //此次出错的事件 更新失败原因 失败重试次数
+                //TODO 此次出错的事件  更新失败原因 失败重试次数 还是所有流程都更新失败次数
+                throw new RuntimeException(e.getMessage());
             }
         });
         //TODO 没出错 全部设置为成功 对应的更新失败的那张表也置位成功 定时任务可以根据这张更新表失败的状态的单号反查失败表失败的记录进行重试
